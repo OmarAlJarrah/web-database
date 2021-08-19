@@ -74,6 +74,5 @@ public class AuthorizationManager {
       return validateId() && validatePassword();
     }
 
-
   }
 }

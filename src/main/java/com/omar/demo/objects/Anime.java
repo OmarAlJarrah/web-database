@@ -89,7 +89,7 @@ public class Anime implements AnimeInterface { // package-private
       return this.id != 0 && !this.name.equals("") && this.creatorId != 0;
     }
 
-    public Object build() {
+    public Object create() {
       if (validateBuiltObject()) {
         return new Anime(this);
       } else {
