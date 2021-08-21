@@ -1,7 +1,7 @@
 package com.omar.demo.controller;
 
 import com.omar.demo.data.AnimeResource;
-import com.omar.demo.data.StudioReference;
+import com.omar.demo.data.StudioResource;
 import com.omar.demo.objects.Anime;
 import com.omar.demo.objects.DataRecord;
 import com.omar.demo.objects.Studio;
@@ -28,7 +28,7 @@ public class CreateController {
   AnimeResource animeResource;
 
   @Autowired
-  StudioReference studioResource;
+  StudioResource studioResource;
 
   @Autowired
   ValidateService validateService;
@@ -61,8 +61,31 @@ public class CreateController {
             .setYearOfProduction(Integer.parseInt(year))
             .setCreatorId(Integer.parseInt(studioId))
             .create());
+
     if (validateService.validateCreate(dataRecord, animeResource)) {
       service.create(dataRecord, animeResource);
+    } else {
+      model.addAttribute("errorMessage", "Invalid data!");
+    }
+    return "create";
+  }
+
+  @PostMapping("/create-studio")
+  public String postCreateStudio(@RequestParam("name") String name,
+                                 @RequestParam("id") String id,
+                                 @RequestParam("year") String year,
+                                 @RequestParam("location") String location,
+                                 ModelMap model) {
+
+    DataRecord dataRecord = (DataRecord) new Studio.Builder()
+            .setId(Long.parseLong(id))
+            .setName(name)
+            .setLocation(location)
+            .setStartYear(Long.parseLong(year))
+            .build();
+
+    if (validateService.validateCreate(dataRecord, studioResource)) {
+      service.create(dataRecord, studioResource);
     } else {
       model.addAttribute("errorMessage", "Invalid data!");
     }

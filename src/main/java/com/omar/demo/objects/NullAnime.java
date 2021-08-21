@@ -1,13 +1,11 @@
 package com.omar.demo.objects;
 
-public class NullAnime implements AnimeInterface {
+public class NullAnime implements DataRecord {
 
-  @Override
   public int getCreatorId() {
     return 0;
   }
 
-  @Override
   public String getName() {
     return "";
   }

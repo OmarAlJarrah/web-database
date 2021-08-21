@@ -1,7 +1,7 @@
 package com.omar.demo.objects;
 
 
-public class Studio implements StudioInterface {
+public class Studio implements DataRecord {
   private long id = 0L;
   private String name = "";
   private String location = "";
@@ -19,16 +19,13 @@ public class Studio implements StudioInterface {
     return id;
   }
 
-  @Override
   public String getName() {
     return name;
   }
 
-  @Override
   public String getLocation() {
     return location;
   }
-
 
   public long getStartYear() {
     return startYear;

@@ -1,20 +1,16 @@
 package com.omar.demo.objects;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class NullStudio implements StudioInterface {
+public class NullStudio implements DataRecord {
   @Override
   public long getId() {
     return 0L;
   }
 
-  @Override
   public String getName() {
     return "";
   }
 
-  @Override
   public String getLocation() {
     return "";
   }

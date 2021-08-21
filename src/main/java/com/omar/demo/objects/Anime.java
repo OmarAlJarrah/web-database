@@ -1,7 +1,7 @@
 package com.omar.demo.objects;
 
 
-public class Anime implements AnimeInterface { // package-private
+public class Anime implements DataRecord { // package-private
   private final long id;
   private String name;
   private int yearOfProduction;
@@ -23,12 +23,10 @@ public class Anime implements AnimeInterface { // package-private
     return id;
   }
 
-  @Override
   public int getCreatorId() {
     return creatorId;
   }
 
-  @Override
   public String getName() {
     return name;
   }

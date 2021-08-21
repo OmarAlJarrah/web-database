@@ -2,7 +2,7 @@ package com.omar.demo.controller;
 
 import com.omar.demo.data.AnimeResource;
 import com.omar.demo.data.Resource;
-import com.omar.demo.data.StudioReference;
+import com.omar.demo.data.StudioResource;
 import com.omar.demo.service.DeleteService;
 import com.omar.demo.service.ValidateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class DeleteController {
   AnimeResource animeResource;
 
   @Autowired
-  StudioReference studioReference;
+  StudioResource studioResource;
 
   @Autowired
   DeleteService service;
@@ -36,12 +36,13 @@ public class DeleteController {
   public String postDelete(@RequestParam("id") String id,
                            @RequestParam("type") String type,
                            ModelMap model) {
-    Resource resource = (type.equals("anime")? animeResource : studioReference);
+
+    Resource resource = (type.equals("anime")? animeResource : studioResource);
 
     if (validateService.validateId(Long.parseLong(id), resource)) {
       service.delete(Long.parseLong(id), animeResource);
     } else {
-      model.addAttribute("", "Invalid Id");
+      model.addAttribute("errorMessage", "Invalid Id");
     }
     return "delete";
   }

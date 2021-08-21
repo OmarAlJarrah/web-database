@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Component
-public class StudioReference implements Resource {
+public class StudioResource implements Resource {
   private static final Map<Long, String> resources = new HashMap<>();
   private static final Class<?> outputClass = Studio.class;
 
