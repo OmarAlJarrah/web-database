@@ -6,6 +6,8 @@ class ExcludedUrls {
   private ExcludedUrls() {}
 
   public static boolean validate(String url) {
-    return url.contains("login") || url.contains("home") || url.equals("");
+    return url.contains("login")
+            || url.contains("home")
+            || url.equals("");
   }
 }

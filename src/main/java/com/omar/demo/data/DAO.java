@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class DAO {
 
+  private static DAO dao;
+
   public List<Object> read(long id, Resource resource) {
     List<Object> list = new ArrayList<>();
     synchronized (resource.access(id)){
@@ -48,5 +50,12 @@ public class DAO {
   public void update(Resource resource, DataRecord dataRecord) {
     delete(dataRecord.getId(), resource);
     create(resource, dataRecord);
+  }
+
+  public static DAO getDao() {
+    if (dao == null) {
+      dao = new DAO();
+    }
+    return dao;
   }
 }

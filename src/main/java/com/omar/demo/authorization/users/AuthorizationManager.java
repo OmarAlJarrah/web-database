@@ -30,49 +30,9 @@ public class AuthorizationManager {
             && (user.isAdmin() == isAdmin);
   }
 
-  private static boolean userExists(long id) {
+  protected static boolean userExists(long id) {
     return (new File(Reference.parseReference(id, User.class)).exists());
   }
 
-  public static class UserBuilder {
-    User user;
 
-    Object create() {
-      if (validate()) {
-        return user;
-      } else {
-        return new NullUser();
-      }
-    }
-
-    UserBuilder userId(long id) {
-      this.user.setId(id);
-      return this;
-    }
-
-
-    UserBuilder password(String password) {
-      this.user.setPassword(password);
-      return this;
-    }
-
-    UserBuilder isAdmin(boolean isAdmin) {
-      this.user.setAdmin(isAdmin);
-      return this;
-    }
-
-    private boolean validateId() {
-      return  !userExists(user.getId());
-    }
-
-    private boolean validatePassword() {
-      String password = this.user.getPassword();
-      return  (password == null || password.equals(""));
-    }
-
-    private boolean validate() {
-      return validateId() && validatePassword();
-    }
-
-  }
 }

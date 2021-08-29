@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class ReadService {
   public List<Object> read(long id, Resource resource) {
-    return new DAO().read(id, resource);
+    return DAO.getDao().read(id, resource);
   }
 
   public List<Object> readAll(Resource resource) {

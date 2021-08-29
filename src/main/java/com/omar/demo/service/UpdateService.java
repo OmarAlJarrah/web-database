@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UpdateService {
   public void delete(DataRecord dataRecord, Resource resource) {
-    new DAO().update(resource, dataRecord);
+    DAO.getDao().update(resource, dataRecord);
   }
 }
