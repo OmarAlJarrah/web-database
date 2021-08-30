@@ -34,7 +34,7 @@ public class CreateController {
   ValidateService validateService;
 
   @GetMapping("/create")
-  public String getCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  public String getCreate()  {
     return "create";
   }
 
