@@ -13,5 +13,5 @@
 <p> <a href="http://localhost:8080/delete"> Delete </a> </p>
 <p> <a href="http://localhost:8080/update"> Update </a> </p>
 <p> <a href="http://localhost:8080/read"> Read </a> </p>
-
+<p> <a href="http://localhost:8080/admin"> Admin </a> </p>
 </body>

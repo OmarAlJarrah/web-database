@@ -11,18 +11,18 @@ public class UserBuilder {
     }
   }
 
-  UserBuilder userId(long id) {
+  public UserBuilder userId(long id) {
     this.user.setId(id);
     return this;
   }
 
 
-  UserBuilder password(String password) {
+  public UserBuilder password(String password) {
     this.user.setPassword(password);
     return this;
   }
 
-  UserBuilder isAdmin(boolean isAdmin) {
+  public UserBuilder isAdmin(boolean isAdmin) {
     this.user.setAdmin(isAdmin);
     return this;
   }

@@ -7,7 +7,7 @@ public class Anime implements DataRecord { // package-private
   private int yearOfProduction;
   private int rating;
   private int watchCount;
-  private final int creatorId;
+  private final long creatorId;
 
   private Anime(Builder builder) {
     this.id = builder.id;
@@ -23,7 +23,7 @@ public class Anime implements DataRecord { // package-private
     return id;
   }
 
-  public int getCreatorId() {
+  public long getCreatorId() {
     return creatorId;
   }
 
@@ -51,7 +51,7 @@ public class Anime implements DataRecord { // package-private
     private int yearOfProduction;
     private int rating;
     private int watchCount;
-    private int creatorId;
+    private long creatorId;
 
     public Builder setId(long id) {
       this.id = id;
@@ -78,7 +78,7 @@ public class Anime implements DataRecord { // package-private
       return this;
     }
 
-    public Builder setCreatorId(int creatorId) {
+    public Builder setCreatorId(long creatorId) {
       this.creatorId = creatorId;
       return this;
     }

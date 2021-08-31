@@ -14,4 +14,8 @@ public class ValidateService {
   public boolean validateId(long id, Resource resource) {
     return !(resource.access(id) instanceof NullSingletonObject);
   }
+
+  public boolean validatePassword(String password) {
+    return password.length() >= 6;
+  }
 }

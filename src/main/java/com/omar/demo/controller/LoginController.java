@@ -30,6 +30,7 @@ public class LoginController {
     if (service.validate(Long.parseLong(id),
             password, userType.equals("admin"))) {
       response.addCookie(new Cookie("authorized", "true"));
+      response.addCookie(new Cookie("isAdmin", Boolean.toString(userType.equals("admin"))));
       return "home";
     } else {
       model.addAttribute("errorMessage", "ERROR");

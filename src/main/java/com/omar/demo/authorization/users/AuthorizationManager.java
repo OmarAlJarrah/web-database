@@ -9,13 +9,15 @@ import java.io.File;
 public class AuthorizationManager {
   private AuthorizationManager() {}
 
-  public static void addUser(Object user) {
+  public static boolean addUser(Object user) {
     try {
       User userObject = (User) user;
       SerializationMediator.serialize(userObject, User.class);
+      return true;
     } catch (ClassCastException e) {
-      // expected in case the user is invalid
+      // expected in case the user is invalid, should be processed before this level.
     }
+    return false;
   }
 
   private static User getUser(long id) {
