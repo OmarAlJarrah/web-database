@@ -17,7 +17,7 @@
         <option value="anime">Anime</option>
         <option value="studio">Studio</option>
     </SELECT>
-
+</form>
     <jsp:include page="forms/${formView}"/>
 
 </body>
