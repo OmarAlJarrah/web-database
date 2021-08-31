@@ -1,20 +1,15 @@
 package com.omar.demo.data;
 
-import com.omar.demo.objects.Anime;
-import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@Component
-public class AnimeResource implements Resource {
-  private static final Map<Long, String> resources = new HashMap<>();
-  private static final Class<?> outputClass = Anime.class;
+class ResourceObject implements Resource {
+  public static final Map<Long, String> resources = new HashMap<>();
+  private Class<?> objectClass;
 
-
-  public Class<?> getOutputClass() {
-    return outputClass;
+  public ResourceObject(Class<?> objectClass) {
+    this.objectClass = objectClass;
   }
 
   @Override
@@ -28,12 +23,19 @@ public class AnimeResource implements Resource {
     }
   }
 
+  @Override
   public void add(long id, String reference) {
     synchronized (resources) {
       resources.put(id, reference);
     }
   }
 
+  @Override
+  public Class<?> getOutputClass() {
+    return objectClass;
+  }
+
+  @Override
   public Set<Long> getKeySet() {
     synchronized (resources) {
       return resources.keySet();

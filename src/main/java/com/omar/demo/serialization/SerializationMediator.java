@@ -3,6 +3,9 @@ package com.omar.demo.serialization;
 import com.omar.demo.objects.DataRecord;
 
 public class SerializationMediator {
+
+  private SerializationMediator() {}
+
   public static synchronized void serialize(DataRecord dataRecord, Class<?> objectClass) {
     Serializer.serialize(dataRecord, objectClass);
   }

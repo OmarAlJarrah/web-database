@@ -15,7 +15,8 @@ public class AuthorizationManager {
       SerializationMediator.serialize(userObject, User.class);
       return true;
     } catch (ClassCastException e) {
-      // expected in case the user is invalid, should be processed before this level.
+      // expected in case the user is invalid, mostly it's impossible for this exception to be thrown.
+
     }
     return false;
   }

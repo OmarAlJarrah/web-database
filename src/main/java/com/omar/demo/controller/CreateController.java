@@ -1,23 +1,19 @@
 package com.omar.demo.controller;
 
-import com.omar.demo.data.AnimeResource;
-import com.omar.demo.data.StudioResource;
+import com.omar.demo.data.AnimeResourceProxy;
+import com.omar.demo.data.StudioResourceProxy;
 import com.omar.demo.objects.Anime;
 import com.omar.demo.objects.DataRecord;
 import com.omar.demo.objects.Studio;
 import com.omar.demo.service.CreateService;
 import com.omar.demo.service.ValidateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Controller
 public class CreateController {
@@ -25,10 +21,10 @@ public class CreateController {
   CreateService service;
 
   @Autowired
-  AnimeResource animeResource;
+  AnimeResourceProxy animeResourceProxy;
 
   @Autowired
-  StudioResource studioResource;
+  StudioResourceProxy studioResourceProxy;
 
   @Autowired
   ValidateService validateService;
@@ -38,13 +34,14 @@ public class CreateController {
     return "create";
   }
 
+
   @PostMapping("/create")
   public String postCreate(@RequestParam("operation") String operation, ModelMap model) {
       model.addAttribute("formView", "anime-form.jsp");
     return "create";
   }
 
-
+  @Async
   @PostMapping("/create-anime")
   public String postCreateRecord(@RequestParam("name") String name,
                                  @RequestParam("id") String id,
@@ -62,14 +59,15 @@ public class CreateController {
             .setCreatorId(Integer.parseInt(studioId))
             .create());
 
-    if (validateService.validateCreate(dataRecord, animeResource)) {
-      service.create(dataRecord, animeResource);
+    if (validateService.validateCreate(dataRecord, animeResourceProxy)) {
+      service.create(dataRecord, animeResourceProxy);
     } else {
       model.addAttribute("errorMessage", "Invalid data!");
     }
     return "create";
   }
 
+  @Async
   @PostMapping("/create-studio")
   public String postCreateStudio(@RequestParam("name") String name,
                                  @RequestParam("id") String id,
@@ -84,8 +82,8 @@ public class CreateController {
             .setStartYear(Long.parseLong(year))
             .build();
 
-    if (validateService.validateCreate(dataRecord, studioResource)) {
-      service.create(dataRecord, studioResource);
+    if (validateService.validateCreate(dataRecord, studioResourceProxy)) {
+      service.create(dataRecord, studioResourceProxy);
     } else {
       model.addAttribute("errorMessage", "Invalid data!");
     }
