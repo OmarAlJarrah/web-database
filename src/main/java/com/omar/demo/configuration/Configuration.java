@@ -21,8 +21,6 @@ public class Configuration {
   @Autowired
   StudioResourceProxy studioProxy;
 
-
-
   @PostConstruct
   private void config() {
     File currentDirectory = new File("./");

@@ -1,14 +1,23 @@
 package com.omar.demo.data;
 
+import com.omar.demo.log.Log;
 import com.omar.demo.objects.DataRecord;
+import com.omar.demo.serialization.SerializationMediator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+@Component
 public class DAO {
 
   private static DAO dao;
+
+  @Autowired
+  Log logger;
 
   public List<Object> read(long id, Resource resource) {
     List<Object> list = new ArrayList<>();
@@ -22,9 +31,9 @@ public class DAO {
 
   public List<Object> readAll(Resource resource) {
     List<Object> list = new ArrayList<>();
-    synchronized (resource){
-      Set<Long> keys = resource.getKeySet();
-      for (long id: keys){
+    Set<Long> keys = resource.getKeySet();
+    for (long id: keys){
+      synchronized (resource.access(id)){
         Crud readOperation = Read.factory(id);
         Operation operation = Operation.factory(readOperation, resource);
         list.add(operation.doAction());
@@ -38,6 +47,12 @@ public class DAO {
       Crud deleteOperation = Delete.factory(id);
       Operation operation = Operation.factory(deleteOperation, resource);
       operation.doAction();
+      String transaction = new StringBuilder()
+                      .append("delete ")
+                      .append(new Date().getTime())
+                      .append(id)
+                      .toString();
+      logger.logTransaction(transaction);
     }
   }
 
@@ -45,6 +60,14 @@ public class DAO {
     Crud createOperation = Create.factory(dataRecord.getId(), dataRecord);
     Operation operation = Operation.factory(createOperation, resource);
     operation.doAction();
+
+    String transaction = new StringBuilder()
+            .append("create ")
+            .append(new Date().getTime())
+            .append(SerializationMediator.getSerializedString(dataRecord, operation.resource.getOutputClass()))
+            .toString();
+
+    logger.logTransaction(transaction);
   }
 
   public void update(Resource resource, DataRecord dataRecord) {

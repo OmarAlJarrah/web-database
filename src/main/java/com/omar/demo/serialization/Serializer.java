@@ -30,4 +30,8 @@ class Serializer {
       e.printStackTrace();
     }
   }
+
+  public static synchronized String getForm(DataRecord dataRecord, Class<?> objectClass) {
+    return gson.toJson(objectClass.cast(dataRecord));
+  }
 }
