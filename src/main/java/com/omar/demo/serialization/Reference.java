@@ -19,6 +19,11 @@ public class Reference {
             .toString();
   }
 
+  public static long parseId(String reference) {
+    int indexOfFirstDot = reference.indexOf('.');
+    return Long.parseLong(reference.substring(0, indexOfFirstDot));
+  }
+
   public String getReference() {
     return reference;
   }
