@@ -21,12 +21,12 @@ public class CacheObject implements Cache {
 
   @Override
   public void update(long id, Object object, double overall) {
-    double size = (double) data.size();
-    if ((size/overall)*100 > 10 && overall > 1e3) {
+    double size = data.size();
+    if (((size/overall)*100 > 10) && (overall >= 10)) {
       List<Object> keys = new ArrayList<>(data.keySet());
-      Object randomKey = keys.get(random.nextInt(keys.size()));
+      Long randomKey = (Long) keys.get(random.nextInt(keys.size()));
       data.remove(randomKey);
+      data.putIfAbsent(id, object);
     }
-    data.putIfAbsent(id, object);
   }
 }
