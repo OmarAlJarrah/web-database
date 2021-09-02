@@ -46,7 +46,7 @@ public class ReadController {
   }
 
   @Async
-  @PostMapping("/read-all")
+  @PostMapping("/readAll")
   public ModelAndView readAll(@RequestParam("type") String type) {
     ModelAndView model = new ModelAndView("read");
     Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);

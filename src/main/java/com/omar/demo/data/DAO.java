@@ -32,7 +32,9 @@ public class DAO {
   public List<Object> readAll(Resource resource) {
     List<Object> list = new ArrayList<>();
     Set<Long> keys = resource.getKeySet();
-    for (long id: keys){
+    for (long id: keys) {
+      if (resource.access(id) == null)
+        continue; // In case it was deleted at some other thread.
       synchronized (resource.access(id)){
         Crud readOperation = Read.factory(id);
         Operation operation = Operation.factory(readOperation, resource);
