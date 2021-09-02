@@ -6,7 +6,7 @@ import com.omar.demo.objects.Anime;
 import com.omar.demo.objects.DataRecord;
 import com.omar.demo.objects.Studio;
 import com.omar.demo.service.CreateService;
-import com.omar.demo.service.ValidateService;
+import com.omar.demo.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ public class CreateController {
   StudioResourceProxy studioResourceProxy;
 
   @Autowired
-  ValidateService validateService;
+  ValidationService validationService;
 
   @GetMapping("/create")
   public String getCreate()  {
@@ -59,7 +59,7 @@ public class CreateController {
             .setCreatorId(Integer.parseInt(studioId))
             .create());
 
-    if (validateService.validateCreate(dataRecord, animeResourceProxy)) {
+    if (validationService.validateCreate(dataRecord, animeResourceProxy)) {
       service.create(dataRecord, animeResourceProxy);
     } else {
       model.addAttribute("errorMessage", "Invalid data!");
@@ -82,7 +82,7 @@ public class CreateController {
             .setStartYear(Long.parseLong(year))
             .build();
 
-    if (validateService.validateCreate(dataRecord, studioResourceProxy)) {
+    if (validationService.validateCreate(dataRecord, studioResourceProxy)) {
       service.create(dataRecord, studioResourceProxy);
     } else {
       model.addAttribute("errorMessage", "Invalid data!");

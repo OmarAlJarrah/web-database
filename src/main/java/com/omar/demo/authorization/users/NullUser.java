@@ -1,8 +1,8 @@
 package com.omar.demo.authorization.users;
 
 public class NullUser {
-  public String getUsername() {
-    return "";
+  public long getId() {
+    return 0L;
   }
 
   public String getPassword() {

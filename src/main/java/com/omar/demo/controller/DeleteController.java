@@ -4,7 +4,7 @@ import com.omar.demo.data.AnimeResourceProxy;
 import com.omar.demo.data.Resource;
 import com.omar.demo.data.StudioResourceProxy;
 import com.omar.demo.service.DeleteService;
-import com.omar.demo.service.ValidateService;
+import com.omar.demo.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class DeleteController {
   DeleteService service;
 
   @Autowired
-  ValidateService validateService;
+  ValidationService validationService;
 
   @GetMapping("/delete")
   public String getDelete() {
@@ -41,7 +41,7 @@ public class DeleteController {
 
     Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
 
-    if (validateService.validateId(Long.parseLong(id), resource)) {
+    if (validationService.validateId(Long.parseLong(id), resource)) {
       service.delete(Long.parseLong(id), animeResourceProxy);
     } else {
       model.addAttribute("errorMessage", "Invalid Id");

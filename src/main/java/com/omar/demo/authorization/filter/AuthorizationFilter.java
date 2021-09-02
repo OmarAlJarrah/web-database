@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Component
-@WebFilter(filterName = "AuthenticationFilter")
+@WebFilter(filterName = "AuthorizationFilter")
 @Order(2)
 public class AuthorizationFilter implements Filter {
 

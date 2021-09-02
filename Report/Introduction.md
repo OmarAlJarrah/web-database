@@ -23,7 +23,7 @@ data handling, supported by a cache implementation to improve performance, all i
 ## What are the criteria of the database that is featured?
 + ACID criteria (atomicity, consistency, isolation, durability) that is a set of properties of database transactions
 intended to guarantee data validity despite errors, power failures, and other mishaps. In the context of databases, a
-sequence of database operations that satisfies the ACID properties (which can be perceived as a single logical operation
+sequence of database operations that satisfies the ACID properties (which can be perceived as a single logical operationMediator
 on the data) is called a transaction.
 
 ## What criteria did I follow in the design and implementation of the database?
@@ -39,7 +39,7 @@ never before been published.
 
 ## What is CI/CD?
 + CI/CD or CICD is the combined practices of continuous integration (CI) and either continuous delivery or continuous
-deployment (CD). CI/CD bridges the gaps between development and operation activities and teams by enforcing automation 
+deployment (CD). CI/CD bridges the gaps between development and operationMediator activities and teams by enforcing automation 
 in building, testing and deployment of applications. The process contrasts with traditional methods where all updates 
 were integrated into one large batch before rolling out the newer version. Modern day DevOps practices involve continuous 
 development, continuous testing, continuous integration, continuous deployment and continuous monitoring of software 

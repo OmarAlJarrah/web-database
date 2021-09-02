@@ -4,7 +4,7 @@ import com.omar.demo.data.AnimeResourceProxy;
 import com.omar.demo.data.Resource;
 import com.omar.demo.data.StudioResourceProxy;
 import com.omar.demo.service.ReadService;
-import com.omar.demo.service.ValidateService;
+import com.omar.demo.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class ReadController {
   ReadService service;
 
   @Autowired
-  ValidateService validateService;
+  ValidationService validationService;
 
   @Autowired
   AnimeResourceProxy animeResourceProxy;
@@ -37,7 +37,7 @@ public class ReadController {
   public ModelAndView read(@RequestParam("id") String id, @RequestParam("type") String type) {
     ModelAndView model = new ModelAndView("read");
     Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
-    if (validateService.validateId(Long.parseLong(id), resource)) {
+    if (validationService.validateId(Long.parseLong(id), resource)) {
       model.addObject(type, service.read(Long.parseLong(id), resource));
     } else {
       model.addObject("errorMessage", "Invalid id");

@@ -8,7 +8,7 @@ import java.util.Set;
 @Component
 public class AnimeResourceProxy implements Resource {
   private static final Resource resource = new ResourceObject(Anime.class);
-  private final Cache cache = new Cache();
+  private final CacheObject cacheObject = new CacheObject();
 
   @Override
   public Class<?> getOutputClass() {
@@ -17,12 +17,12 @@ public class AnimeResourceProxy implements Resource {
 
   @Override
   public Object access(long id) {
-    if (cache.getObject(id) instanceof NullSingletonObject) {
+    if (cacheObject.getObject(id) instanceof NullSingletonObject) {
       Object object = resource.access(id);
-      cache.update(id, object, resource.getKeySet().size());
+      cacheObject.update(id, object, resource.getKeySet().size());
       return object;
     } else {
-      return cache.getObject(id);
+      return cacheObject.getObject(id);
     }
   }
 

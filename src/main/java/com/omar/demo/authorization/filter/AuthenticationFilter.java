@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Component
-@WebFilter(filterName = "AuthorizationFilter")
+@WebFilter(filterName = "AuthenticationFilter")
 @Order(1)
 public class AuthenticationFilter implements Filter {
 

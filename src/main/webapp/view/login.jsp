@@ -9,7 +9,6 @@
 <head>
     <title>Login Page</title>
 </head>
-<a href="http://localhost:8080/create"> Create </a>
 <body>
 <p><font color="red">${errorMessage}</font></p>
 <form action="/login" method="post">

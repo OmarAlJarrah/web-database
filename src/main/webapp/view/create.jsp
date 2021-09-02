@@ -12,7 +12,7 @@
 <body>
 <p><font color="red">${errorMessage}</font></p>
 <form action="/create" method="POST" >
-    <SELECT name="operation" id="operation" onchange="this.form.submit();">
+    <SELECT name="operationMediator" id="operationMediator" onchange="this.form.submit();">
         <option value="null">Select option please</option>
         <option value="anime">Anime</option>
         <option value="studio">Studio</option>

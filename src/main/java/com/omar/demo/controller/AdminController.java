@@ -2,7 +2,7 @@ package com.omar.demo.controller;
 
 
 import com.omar.demo.service.AdminService;
-import com.omar.demo.service.ValidateService;
+import com.omar.demo.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +18,7 @@ public class AdminController {
   AdminService service;
 
   @Autowired
-  ValidateService validateService;
+  ValidationService validationService;
 
   @GetMapping("/admin")
   public ModelAndView getAdminView() {
@@ -32,7 +32,7 @@ public class AdminController {
                         @RequestParam("password") String password,
                         @RequestParam("userType") String userType,
                         ModelMap model) {
-    if (!validateService.validatePassword(password)
+    if (!validationService.validatePassword(password)
                         || !service.addUser(Long.parseLong(id), password, userType)) {
       model.addAttribute("errorMessage", "Invalid data!");
     }

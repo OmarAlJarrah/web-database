@@ -6,7 +6,7 @@ import com.omar.demo.objects.DataRecord;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ValidateService {
+public class ValidationService {
   public boolean validateCreate(DataRecord dataRecord, Resource resource) {
     return (resource.access(dataRecord.getId()) instanceof NullSingletonObject);
   }

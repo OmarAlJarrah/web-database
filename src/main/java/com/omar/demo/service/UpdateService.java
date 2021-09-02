@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UpdateService {
-  public void delete(DataRecord dataRecord, Resource resource) {
+  public void update(DataRecord dataRecord, Resource resource) {
     DAO.getDao().update(resource, dataRecord);
   }
 }

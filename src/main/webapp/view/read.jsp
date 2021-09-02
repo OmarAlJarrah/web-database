@@ -13,7 +13,7 @@
     <input type="number" name="id" value="0">
     <input value="read" type="submit" />
 </form>
-<form action="/read-all" method="post">
+<form action="/readAll" method="post">
     <label>
         <SELECT name="type">
             <OPTION Value="anime">Anime</OPTION>
