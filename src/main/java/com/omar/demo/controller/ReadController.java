@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.concurrent.CompletableFuture;
+
 @Controller
 public class ReadController {
   @Autowired
@@ -34,7 +36,7 @@ public class ReadController {
 
   @Async
   @PostMapping("read")
-  public ModelAndView read(@RequestParam("id") String id, @RequestParam("type") String type) {
+  public CompletableFuture<ModelAndView> read(@RequestParam("id") String id, @RequestParam("type") String type) {
     ModelAndView model = new ModelAndView("read");
     Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
     if (validationService.validateId(Long.parseLong(id), resource)) {
@@ -42,15 +44,15 @@ public class ReadController {
     } else {
       model.addObject("errorMessage", "Invalid id");
     }
-    return model;
+    return CompletableFuture.completedFuture(model);
   }
 
   @Async
   @PostMapping("/readAll")
-  public ModelAndView readAll(@RequestParam("type") String type) {
+  public CompletableFuture<ModelAndView> readAll(@RequestParam("type") String type) {
     ModelAndView model = new ModelAndView("read");
     Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
     model.addObject(type, service.readAll(resource));
-    return model;
+    return CompletableFuture.completedFuture(model);
   }
 }

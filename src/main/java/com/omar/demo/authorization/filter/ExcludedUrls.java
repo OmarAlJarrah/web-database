@@ -5,7 +5,7 @@ class ExcludedUrls {
 
   private ExcludedUrls() {}
 
-  public static boolean validateUser(String url) {
+  public synchronized static boolean validateUser(String url) {
     return url.contains("login")
             || url.contains("home")
             || url.equals("");

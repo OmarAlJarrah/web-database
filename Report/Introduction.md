@@ -6,7 +6,7 @@ DBMS, along with the applications that are associated with them, are referred to
 to just database.
 
 ## What is Concurrency?
-+ concurrency is the ability of different parts or units of a program, algorithm, or problem to be executed out-of-order 
++ Concurrency is the ability of different parts or units of a program, algorithm, or problem to be executed out-of-order 
 or at the same time simultaneously partial order, without affecting the final outcome. This allows for parallel execution
 of the concurrent units, which can significantly improve overall speed of the execution in multi-processor and multi-core
 systems. In more technical terms, concurrency refers to the decomposability of a program, algorithm, or problem into
@@ -38,7 +38,7 @@ illustrated with working code examples. Many patterns, idioms, and antipatterns 
 never before been published.
 
 ## What is CI/CD?
-+ CI/CD or CICD is the combined practices of continuous integration (CI) and either continuous delivery or continuous
++ CI/CD is the combined practices of continuous integration (CI) and either continuous delivery or continuous
 deployment (CD). CI/CD bridges the gaps between development and operationMediator activities and teams by enforcing automation 
 in building, testing and deployment of applications. The process contrasts with traditional methods where all updates 
 were integrated into one large batch before rolling out the newer version. Modern day DevOps practices involve continuous 

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.concurrent.CompletableFuture;
+
 @Controller
 public class DeleteController {
 
@@ -35,9 +37,9 @@ public class DeleteController {
 
   @Async
   @PostMapping("/delete")
-  public String postDelete(@RequestParam("id") String id,
-                           @RequestParam("type") String type,
-                           ModelMap model) {
+  public CompletableFuture<String> postDelete(@RequestParam("id") String id,
+                                              @RequestParam("type") String type,
+                                              ModelMap model) {
 
     Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
 
@@ -46,7 +48,7 @@ public class DeleteController {
     } else {
       model.addAttribute("errorMessage", "Invalid Id");
     }
-    return "delete";
+    return CompletableFuture.completedFuture("delete");
   }
 
 }

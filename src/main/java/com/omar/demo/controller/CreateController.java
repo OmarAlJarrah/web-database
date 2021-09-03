@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.concurrent.CompletableFuture;
+
 @Controller
 public class CreateController {
   @Autowired
@@ -29,27 +31,28 @@ public class CreateController {
   @Autowired
   ValidationService validationService;
 
+
   @GetMapping("/create")
   public String getCreate()  {
     return "create";
   }
 
-
+  @Async
   @PostMapping("/create")
-  public String postCreate(@RequestParam("operation") String operation, ModelMap model) {
+  public CompletableFuture<String> postCreate(@RequestParam("operation") String operation, ModelMap model) {
       model.addAttribute("formView", "anime-form.jsp");
-    return "create";
+    return CompletableFuture.completedFuture("create");
   }
 
   @Async
   @PostMapping("/create-anime")
-  public String postCreateRecord(@RequestParam("name") String name,
-                                 @RequestParam("id") String id,
-                                 @RequestParam("year") String year,
-                                 @RequestParam("studio_id") String studioId,
-                                 @RequestParam("watch_count") String watchCount,
-                                 @RequestParam("rating") String rating,
-                                 ModelMap model) {
+  public CompletableFuture<String> postCreateRecord(@RequestParam("name") String name,
+                                                    @RequestParam("id") String id,
+                                                    @RequestParam("year") String year,
+                                                    @RequestParam("studio_id") String studioId,
+                                                    @RequestParam("watch_count") String watchCount,
+                                                    @RequestParam("rating") String rating,
+                                                    ModelMap model) {
     DataRecord dataRecord = (DataRecord) (new Anime.Builder()
             .setId(Long.parseLong(id))
             .setName(name)
@@ -64,16 +67,16 @@ public class CreateController {
     } else {
       model.addAttribute("errorMessage", "Invalid data!");
     }
-    return "create";
+    return CompletableFuture.completedFuture("create");
   }
 
   @Async
   @PostMapping("/create-studio")
-  public String postCreateStudio(@RequestParam("name") String name,
-                                 @RequestParam("id") String id,
-                                 @RequestParam("year") String year,
-                                 @RequestParam("location") String location,
-                                 ModelMap model) {
+  public CompletableFuture<String> postCreateStudio(@RequestParam("name") String name,
+                                                    @RequestParam("id") String id,
+                                                    @RequestParam("year") String year,
+                                                    @RequestParam("location") String location,
+                                                    ModelMap model) {
 
     DataRecord dataRecord = (DataRecord) new Studio.Builder()
             .setId(Long.parseLong(id))
@@ -87,6 +90,6 @@ public class CreateController {
     } else {
       model.addAttribute("errorMessage", "Invalid data!");
     }
-    return "create";
+    return CompletableFuture.completedFuture("create");
   }
 }

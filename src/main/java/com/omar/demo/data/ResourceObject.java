@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Set;
 
 class ResourceObject implements Resource {
-  public static final Map<Long, String> resources = new HashMap<>();
-  private Class<?> objectClass;
+  private static final Map<Long, String> resources = new HashMap<>();
+  private final Class<?> objectClass;
 
   public ResourceObject(Class<?> objectClass) {
     this.objectClass = objectClass;

@@ -8,12 +8,12 @@ import java.util.logging.Logger;
 
 @Component
 public class Log {
-  private Logger logger;
+  private final Logger logger;
   private FileHandler fileHandler;
 
   public Log() {
     try {
-      fileHandler = new FileHandler("app.log", true);
+      fileHandler = new FileHandler("transactions.log", true);
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -8,7 +8,7 @@ import java.util.Set;
 @Component
 public class AnimeResourceProxy implements Resource {
   private static final Resource resource = new ResourceObject(Anime.class);
-  private final CacheObject cacheObject = new CacheObject();
+  private final Cache cacheObject = new CacheObject();
 
   @Override
   public Class<?> getOutputClass() {

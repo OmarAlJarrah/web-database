@@ -9,7 +9,7 @@ import java.io.File;
 public class AuthorizationManager {
   private AuthorizationManager() {}
 
-  public static boolean addUser(Object user) {
+  public static synchronized boolean addUser(Object user) {
     try {
       User userObject = (User) user;
       SerializationMediator.serialize(userObject, User.class);
@@ -21,11 +21,11 @@ public class AuthorizationManager {
     return false;
   }
 
-  private static User getUser(long id) {
+  private static synchronized User getUser(long id) {
     return (User) SerializationMediator.deserialize(id, User.class);
   }
 
-  public static boolean getAccess(long id, String password, boolean isAdmin) {
+  public static synchronized boolean getAccess(long id, String password, boolean isAdmin) {
     if (!userExists(id)) return false;
 
     User user = getUser(id);
@@ -33,7 +33,7 @@ public class AuthorizationManager {
             && (user.isAdmin() == isAdmin);
   }
 
-  protected static boolean userExists(long id) {
+  protected static synchronized boolean userExists(long id) {
     return (new File(Reference.parseReference(id, User.class)).exists());
   }
 

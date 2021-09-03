@@ -17,7 +17,7 @@ import java.util.List;
 public class AuthenticationFilter implements Filter {
 
   @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+  public synchronized void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
     if (ExcludedUrls.validateUser(((HttpServletRequest)request)
             .getRequestURL()
             .toString()
