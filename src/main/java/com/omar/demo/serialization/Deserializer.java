@@ -6,7 +6,7 @@ import com.omar.demo.objects.NullAnime;
 
 import java.io.*;
 
-class Deserializer {
+class Deserializer extends SerializationMediator {
 
   private static final Gson gson = new GsonBuilder().create();
 

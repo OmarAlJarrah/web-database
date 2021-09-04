@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class DAO {
+public class DAO  {
 
   private static DAO dao;
 

@@ -1,6 +1,10 @@
 package com.omar.demo.authorization.users;
 
-public class NullUser {
+import com.omar.demo.objects.DataRecord;
+
+public class NullUser implements DataRecord {
+
+  @Override
   public long getId() {
     return 0L;
   }
