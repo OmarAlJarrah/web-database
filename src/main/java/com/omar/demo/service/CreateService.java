@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class CreateService {
 
 
-  public synchronized void create(DataRecord dataRecord, Resource resource) {
+  public void create(DataRecord dataRecord, Resource resource) {
     DAO.getDao().create(resource, dataRecord);
   }
 

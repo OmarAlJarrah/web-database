@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ValidationService {
-  public synchronized boolean validateCreate(DataRecord dataRecord, Resource resource) {
+  public boolean validateCreate(DataRecord dataRecord, Resource resource) {
     return (resource.access(dataRecord.getId()) instanceof NullSingletonObject);
   }
 
-  public synchronized boolean validateId(long id, Resource resource) {
+  public boolean validateId(long id, Resource resource) {
     return !(resource.access(id) instanceof NullSingletonObject);
   }
 
-  public synchronized boolean validatePassword(String password) {
+  public boolean validatePassword(String password) {
     return password.length() >= 6;
   }
 }

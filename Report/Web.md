@@ -43,11 +43,11 @@ addition to creation of cookies for later authorization & authentication.
 + ```HomeController``` that is the controller for the home view, its only responsibility is to provide a home page
   that is free of any custom filtering mechanism.
 
-###Services
+### Services
 + ```AdminService```: a service that is responsible for implementing the admin responsibility (adding authorized users), 
 where it will create users & append them to the database.
 
-+ ```LoginService```: a service that is responsible for implementing the login operationMediator. whether the operationMediator is 
++ ```LoginService```: a service that is responsible for implementing the login operation. whether the operation is 
 successful or not, it will return the result to the controller, and the controller is responsible for providing the 
 needed information to the user to know the result of their login attempt.
 
@@ -60,7 +60,7 @@ needed information to the user to know the result of their login attempt.
 one of the translations/explanations of the single responsibility principle states that a module should have one & only
 one reason to change, it's valid as all the methods/operations provided by this service satisfies this goal as long as
 none of them depends on each other, and at the same time all the methods/operations serves one purpose that is the 
-validation of some specific operationMediator. In case more validation is to be added in a future release, if it depends on
+validation of some specific operation. In case more validation is to be added in a future release, if it depends on
 other services, it should be implemented as a separate service, while using something like the mediator design pattern
 can be used to satisfy the dependency injection principle.
 

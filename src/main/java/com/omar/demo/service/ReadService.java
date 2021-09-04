@@ -8,11 +8,11 @@ import java.util.List;
 
 @Service
 public class ReadService {
-  public synchronized List<Object> read(long id, Resource resource) {
+  public List<Object> read(long id, Resource resource) {
     return DAO.getDao().read(id, resource);
   }
 
-  public synchronized List<Object> readAll(Resource resource) {
+  public List<Object> readAll(Resource resource) {
     return new DAO().readAll(resource);
   }
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DeleteService {
-  public synchronized void delete(long id, Resource resource) {
+  public void delete(long id, Resource resource) {
     DAO.getDao().delete(id, resource);
   }
 }

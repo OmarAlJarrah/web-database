@@ -8,20 +8,26 @@ import java.util.logging.Logger;
 
 @Component
 public class Log {
-  private final Logger logger;
-  private FileHandler fileHandler;
+  private final Logger transactionLogger;
+  private FileHandler transactionsFileHandler;
+  private final Logger errorLogger;
+  private FileHandler errorFileHandler;
 
   public Log() {
     try {
-      fileHandler = new FileHandler("transactions.log", true);
+      transactionsFileHandler = new FileHandler("transactions.log", true);
+      errorFileHandler = new FileHandler("errors.log", true);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    logger = Logger.getLogger(Log.class.getName());
-    logger.addHandler(fileHandler);
+    transactionLogger = Logger.getLogger(Log.class.getName());
+    transactionLogger.addHandler(transactionsFileHandler);
+
+    errorLogger = Logger.getLogger(Log.class.getName());
+    errorLogger.addHandler(errorFileHandler);
   }
 
   public void logTransaction(String transaction) {
-    logger.info(transaction);
+    transactionLogger.info(transaction);
   }
 }
