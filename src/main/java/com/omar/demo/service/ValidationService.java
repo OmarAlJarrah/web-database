@@ -11,7 +11,7 @@ public class ValidationService {
     return (resource.access(dataRecord.getId()) instanceof NullSingletonObject);
   }
 
-  public boolean validateId(long id, Resource resource) {
+  public boolean validateDataRecordId(long id, Resource resource) {
     return !(resource.access(id) instanceof NullSingletonObject);
   }
 

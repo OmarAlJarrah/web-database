@@ -43,7 +43,7 @@ public class DeleteController {
 
     Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
 
-    if (validationService.validateId(Long.parseLong(id), resource)) {
+    if (validationService.validateDataRecordId(Long.parseLong(id), resource)) {
       service.delete(Long.parseLong(id), animeResourceProxy);
     } else {
       model.addAttribute("errorMessage", "Invalid Id");

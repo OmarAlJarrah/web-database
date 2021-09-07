@@ -7,7 +7,7 @@ import java.util.Set;
 @Component
 public class StudioResourceProxy implements Resource {
   private static final Resource resource = new ResourceObject(Studio.class);
-  private final Cache cacheObject = new CacheObject();
+  private static final Cache cacheObject = new CacheObject();
 
   @Override
   public Class<?> getOutputClass() {

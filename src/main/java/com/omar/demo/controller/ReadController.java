@@ -39,7 +39,7 @@ public class ReadController {
   public CompletableFuture<ModelAndView> read(@RequestParam("id") String id, @RequestParam("type") String type) {
     ModelAndView model = new ModelAndView("read");
     Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
-    if (validationService.validateId(Long.parseLong(id), resource)) {
+    if (validationService.validateDataRecordId(Long.parseLong(id), resource)) {
       model.addObject(type, service.read(Long.parseLong(id), resource));
     } else {
       model.addObject("errorMessage", "Invalid id");

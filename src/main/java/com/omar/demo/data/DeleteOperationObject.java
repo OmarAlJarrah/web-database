@@ -2,10 +2,10 @@ package com.omar.demo.data;
 
 import java.io.File;
 
-public class Delete implements Crud {
+public class DeleteOperationObject implements Crud {
   private final long id;
 
-  private Delete(long id) {
+  private DeleteOperationObject(long id) {
     this.id = id;
   }
 
@@ -14,7 +14,7 @@ public class Delete implements Crud {
     return new File((String) resource.access(id)).delete();
   }
 
-  public static Delete factory(long id) {
-    return new Delete(id);
+  public static DeleteOperationObject factory(long id) {
+    return new DeleteOperationObject(id);
   }
 }

@@ -4,11 +4,11 @@ import com.omar.demo.objects.DataRecord;
 import com.omar.demo.serialization.Reference;
 import com.omar.demo.serialization.SerializationMediator;
 
-public class Create implements Crud {
+public class CreateOperationObject implements Crud {
   private final long id;
   private final DataRecord dataRecord;
 
-  private Create(long id, DataRecord dataRecord) {
+  private CreateOperationObject(long id, DataRecord dataRecord) {
     this.id = id;
     this.dataRecord = dataRecord;
   }
@@ -19,7 +19,7 @@ public class Create implements Crud {
     return null;
   }
 
-  public static Create factory(long id, DataRecord dataRecord) {
-    return new Create(id, dataRecord);
+  public static CreateOperationObject factory(long id, DataRecord dataRecord) {
+    return new CreateOperationObject(id, dataRecord);
   }
 }

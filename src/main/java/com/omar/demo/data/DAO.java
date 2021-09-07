@@ -22,7 +22,7 @@ public class DAO  {
   public List<Object> read(long id, Resource resource) {
     List<Object> list = new ArrayList<>();
     synchronized (resource.access(id)){
-      Crud readOperation = Read.factory(id);
+      Crud readOperation = ReadOperationObject.factory(id);
       OperationMediator operationMediator = OperationMediator.factory(readOperation, resource);
       list.add(operationMediator.doAction());
       return list;
@@ -36,7 +36,7 @@ public class DAO  {
       if (resource.access(id) == null)
         continue; // In case it was deleted at some other thread.
       synchronized (resource.access(id)){
-        Crud readOperation = Read.factory(id);
+        Crud readOperation = ReadOperationObject.factory(id);
         OperationMediator operationMediator = OperationMediator.factory(readOperation, resource);
         list.add(operationMediator.doAction());
       }
@@ -46,7 +46,7 @@ public class DAO  {
 
   public void delete(long id, Resource resource) {
     synchronized (resource.access(id)){
-      Crud deleteOperation = Delete.factory(id);
+      Crud deleteOperation = DeleteOperationObject.factory(id);
       OperationMediator operationMediator = OperationMediator.factory(deleteOperation, resource);
       operationMediator.doAction();
       String transaction = new StringBuilder()
@@ -59,7 +59,7 @@ public class DAO  {
   }
 
   public void create(Resource resource, DataRecord dataRecord) {
-    Crud createOperation = Create.factory(dataRecord.getId(), dataRecord);
+    Crud createOperation = CreateOperationObject.factory(dataRecord.getId(), dataRecord);
     OperationMediator operationMediator = OperationMediator.factory(createOperation, resource);
     operationMediator.doAction();
 

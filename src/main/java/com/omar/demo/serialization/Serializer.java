@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-class Serializer extends SerializationMediator {
+class Serializer {
 
   private static final Gson gson = new GsonBuilder()
           .serializeNulls()

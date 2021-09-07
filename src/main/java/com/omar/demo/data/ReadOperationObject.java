@@ -3,10 +3,10 @@ package com.omar.demo.data;
 
 import com.omar.demo.serialization.SerializationMediator;
 
-class Read implements Crud {
+class ReadOperationObject implements Crud {
   private final long id;
 
-  private Read(long id) {
+  private ReadOperationObject(long id) {
     this.id = id;
   }
 
@@ -16,7 +16,7 @@ class Read implements Crud {
     return SerializationMediator.deserialize(id, resource.getOutputClass());
   }
 
-  public static Read factory(long id) {
-    return new Read(id);
+  public static ReadOperationObject factory(long id) {
+    return new ReadOperationObject(id);
   }
 }
