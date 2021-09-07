@@ -16,7 +16,7 @@ class ResourceObject implements Resource {
   public Object access(long id) {
     synchronized (resources) {
       if (resources.get(id) == null) {
-        return NullSingletonObject.getObject();
+        return NullSingletonObject.getInstance();
       } else {
         return resources.get(id);
       }

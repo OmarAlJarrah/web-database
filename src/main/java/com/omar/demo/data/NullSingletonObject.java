@@ -5,7 +5,7 @@ public class NullSingletonObject {
 
   private NullSingletonObject() {}
 
-  public static NullSingletonObject getObject() {
+  public static NullSingletonObject getInstance() {
     if (object == null) object = new NullSingletonObject();
     return object;
   }

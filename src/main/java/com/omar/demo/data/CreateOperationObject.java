@@ -13,13 +13,14 @@ public class CreateOperationObject implements Crud {
     this.dataRecord = dataRecord;
   }
 
+  @Override
   public Object doAction(Resource resource) {
     SerializationMediator.serialize(dataRecord, resource.getOutputClass());
     resource.add(id, Reference.parseReference(id, resource.getOutputClass()));
     return null;
   }
 
-  public static CreateOperationObject factory(long id, DataRecord dataRecord) {
+  public static CreateOperationObject getNewInstance(long id, DataRecord dataRecord) {
     return new CreateOperationObject(id, dataRecord);
   }
 }

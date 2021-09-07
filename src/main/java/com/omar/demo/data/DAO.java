@@ -22,8 +22,8 @@ public class DAO  {
   public List<Object> read(long id, Resource resource) {
     List<Object> list = new ArrayList<>();
     synchronized (resource.access(id)){
-      Crud readOperation = ReadOperationObject.factory(id);
-      OperationMediator operationMediator = OperationMediator.factory(readOperation, resource);
+      Crud readOperation = ReadOperationObject.getNewInstance(id);
+      OperationMediator operationMediator = OperationMediator.getOperationMediator(readOperation, resource);
       list.add(operationMediator.doAction());
       return list;
     }
@@ -36,8 +36,8 @@ public class DAO  {
       if (resource.access(id) == null)
         continue; // In case it was deleted at some other thread.
       synchronized (resource.access(id)){
-        Crud readOperation = ReadOperationObject.factory(id);
-        OperationMediator operationMediator = OperationMediator.factory(readOperation, resource);
+        Crud readOperation = ReadOperationObject.getNewInstance(id);
+        OperationMediator operationMediator = OperationMediator.getOperationMediator(readOperation, resource);
         list.add(operationMediator.doAction());
       }
     }
@@ -46,8 +46,8 @@ public class DAO  {
 
   public void delete(long id, Resource resource) {
     synchronized (resource.access(id)){
-      Crud deleteOperation = DeleteOperationObject.factory(id);
-      OperationMediator operationMediator = OperationMediator.factory(deleteOperation, resource);
+      Crud deleteOperation = DeleteOperationObject.getNewInstance(id);
+      OperationMediator operationMediator = OperationMediator.getOperationMediator(deleteOperation, resource);
       operationMediator.doAction();
       String transaction = new StringBuilder()
                       .append("delete ")
@@ -59,8 +59,8 @@ public class DAO  {
   }
 
   public void create(Resource resource, DataRecord dataRecord) {
-    Crud createOperation = CreateOperationObject.factory(dataRecord.getId(), dataRecord);
-    OperationMediator operationMediator = OperationMediator.factory(createOperation, resource);
+    Crud createOperation = CreateOperationObject.getNewInstance(dataRecord.getId(), dataRecord);
+    OperationMediator operationMediator = OperationMediator.getOperationMediator(createOperation, resource);
     operationMediator.doAction();
 
     String transaction = new StringBuilder()
@@ -77,7 +77,7 @@ public class DAO  {
     create(resource, dataRecord);
   }
 
-  public static DAO getDao() {
+  public static DAO getInstance() {
     if (dao == null) {
       dao = new DAO();
     }

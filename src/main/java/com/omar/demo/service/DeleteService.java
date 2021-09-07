@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeleteService {
   public void delete(long id, Resource resource) {
-    DAO.getDao().delete(id, resource);
+    DAO.getInstance().delete(id, resource);
   }
 }

@@ -1,7 +1,13 @@
 package com.omar.demo.authorization.users;
 
-public class UserBuilder extends User {
+public class UserBuilder {
   User user;
+
+  private UserBuilder() {}
+
+  public static UserBuilder getBuilder() {
+    return new UserBuilder();
+  }
 
   Object create() {
     if (validate()) {

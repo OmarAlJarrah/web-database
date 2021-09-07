@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
   public boolean addUser(long id, String password, String userType) {
-    Object user = new UserBuilder()
+    Object user = UserBuilder.getBuilder()
             .userId(id)
             .isAdmin(userType.equals("admin"))
             .password(password);

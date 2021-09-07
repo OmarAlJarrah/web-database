@@ -10,12 +10,14 @@ public class CacheObject implements Cache {
   private final ConcurrentHashMap<Long, Object> data = new ConcurrentHashMap<>();
   private final Random random = new Random();
 
+  private CacheObject() {}
+
   @Override
   public Object getObject(long id) {
     if (data.get(id) != null) {
       return data.get(id);
     } else {
-      return NullSingletonObject.getObject();
+      return NullSingletonObject.getInstance();
     }
   }
 
@@ -28,5 +30,9 @@ public class CacheObject implements Cache {
       data.remove(randomKey);
       data.putIfAbsent(id, object);
     }
+  }
+
+  public static CacheObject getNewInstance() {
+    return new CacheObject();
   }
 }

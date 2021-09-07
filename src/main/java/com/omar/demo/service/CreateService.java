@@ -10,7 +10,7 @@ public class CreateService {
 
 
   public void create(DataRecord dataRecord, Resource resource) {
-    DAO.getDao().create(resource, dataRecord);
+    DAO.getInstance().create(resource, dataRecord);
   }
 
 }

@@ -14,7 +14,7 @@ class OperationMediator {
   }
 
 
-  public static OperationMediator factory(Crud crudOperation, Resource resource) {
+  public static OperationMediator getOperationMediator(Crud crudOperation, Resource resource) {
     return new OperationMediator(crudOperation, resource);
   }
 }

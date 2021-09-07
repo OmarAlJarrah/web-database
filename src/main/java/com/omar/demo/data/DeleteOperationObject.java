@@ -14,7 +14,7 @@ public class DeleteOperationObject implements Crud {
     return new File((String) resource.access(id)).delete();
   }
 
-  public static DeleteOperationObject factory(long id) {
+  public static DeleteOperationObject getNewInstance(long id) {
     return new DeleteOperationObject(id);
   }
 }

@@ -16,7 +16,7 @@ class ReadOperationObject implements Crud {
     return SerializationMediator.deserialize(id, resource.getOutputClass());
   }
 
-  public static ReadOperationObject factory(long id) {
+  public static ReadOperationObject getNewInstance(long id) {
     return new ReadOperationObject(id);
   }
 }
