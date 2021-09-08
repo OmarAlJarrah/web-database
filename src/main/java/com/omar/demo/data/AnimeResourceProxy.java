@@ -1,5 +1,7 @@
 package com.omar.demo.data;
 
+import com.omar.demo.cache.Cache;
+import com.omar.demo.cache.CacheObject;
 import com.omar.demo.objects.Anime;
 
 import org.springframework.stereotype.Component;

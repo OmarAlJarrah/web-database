@@ -1,10 +1,10 @@
 package com.omar.demo.serialization;
 
 public class Reference {
-  String reference;
+  String referenceText;
 
-  private Reference(String reference) {
-    this.reference = reference;
+  private Reference(String referenceText) {
+    this.referenceText = referenceText;
   }
 
   public static Reference factory(long id, Class<?> objectClass) {
@@ -24,7 +24,7 @@ public class Reference {
     return Long.parseLong(reference.substring(0, indexOfFirstDot));
   }
 
-  public String getReference() {
-    return reference;
+  public String getReferenceText() {
+    return referenceText;
   }
 }

@@ -57,7 +57,8 @@
     - ```id``` is ```long``` instead of the boxed primitive ```Long```.
 
 ## Eliminate obsolete object references
-### an obsolete reference is simply a reference that will never be dereferenced again, in other words the object is not destroyed, and is not collected by the garbage collecter (Make the object equals to null instead of keeping it or throwing it without making sure it is destroyed). But remember, Nulling out object references should be the exception rather than the rule, the rule is to null out objects/data that manages its own memory & do not depend on the garbage collecter to do so.
+### An obsolete reference is simply a reference that will never be dereferenced again, in other words the object is not destroyed, and is not collected by the garbage collecter (Make the object equals to null instead of keeping it or throwing it without making sure it is destroyed). But remember, Nulling out object references should be the exception rather than the rule, the rule is to null out objects/data that manages its own memory & do not depend on the garbage collecter to do so.
++ I made sure to eliminate references to data records whenever a delete operation is committed.
 
 ## Avoid finalizers and cleaners.
 
@@ -116,4 +117,70 @@ as a mechanism for that purpose by having the flexibility of optional arguments.
 + I did not use inheritance at all, the only type of inheritance that I used was the implementation of interfaces, also
 I used composition with dependency injection to assure that coupling is minimized, such that adding more features in the
 future has flexibility to the design.
+
+## Prefer interfaces to abstract classes
++ I implemented no abstract classes, but only interfaces, that serve as a contract for implementing classes.
+
+## Use interfaces only to define types
++ Examples:
+    - ```DataRecord``` interface describes a type in which is stored in the database.
+    - ```Resource``` interface describes a type in which is a resource that is used to access data records.
+    - ```Crud``` interface describes a type in which is a transaction object / Crud operation.
+    - ```Cache``` interface describes a type in which is a cache object/wrapper.
+
+## Prefer class hierarchies to tagged classes
++ As stated by the author, using interfaces implements this rule.
+
+## Don’t use raw types
++ No raw types are used.
+
+## Eliminate unchecked warnings
++ I worked on eliminating all warnings, and in case there is a safe code that throws a warning, I used the ```@SuppressWarnings```
+annotation.
+
+## Prefer lists to arrays
++ Whenever I faced an array, I immediately converted it to a list, an example of that is modules in the filter package.
+```
+    Cookie[] cookiesArray = ((HttpServletRequest)request).getCookies();
+    if (cookiesArray == null || cookiesArray.length == 0) {
+      ((HttpServletRequest)request).getRequestDispatcher("/login").forward(request, response);
+      return;
+    }
+    List<Cookie> cookies = Arrays.asList(cookiesArray);
+```
+
+## When you design new types, make sure that they can be used without such casts
++ I tried to make my objects as generic as possible by providing an implemented interface as a contract, and using that
+interface to refer to these objects.
+
+## Favor generic methods
++ I tried to make my methods as generic as possible by providing interfaces reference for objects that are to be parameters.
+
+## Consistently use the Override annotation
++ I made sure to use the ```@Override``` annotation whenever an override operation is being implemented.
+
+## Use marker interfaces to define types
++ I used interfaces to define types, but not mark interfaces, as providing few methods in the interface gives me more flexibility
+when handling objects using interfaces as a reference.
+
+## Consider typesafe heterogeneous containers
++ I used ```ConcurrentHashMap``` as a thread safe container, in addition to a normal ```HashMap``` where I handled the 
+synchronization myself. 
+
+## Check parameters for validity
++ I tried to make my methods as generic as possible, yet I added validation checks for few methods when really needed. I
+tried not to overdo it because as the author said, "The fewer restrictions that you place on parameters, the better,
+assuming the method can do something reasonable with all of the parameter values that it accepts".
+
+## Design method signatures carefully
++ This rule is simply applied by following the rules defined in Clean Code book, which luckily, I tried to keep up with 
+as much as possible.
+
+##  Use overloading judiciously
++ Whenever I found myself doing overloading, I though whether it is necessary or not, in the end I did not implement
+overloading at all.
+
+## Return empty collections or arrays, not nulls
++ By using the null object pattern, I applied this rule and avoided returning null values, and handling ```NullPointerException```
+later on.
 

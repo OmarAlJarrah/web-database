@@ -1,4 +1,6 @@
-package com.omar.demo.data;
+package com.omar.demo.cache;
+
+import com.omar.demo.data.NullSingletonObject;
 
 import java.util.ArrayList;
 import java.util.List;

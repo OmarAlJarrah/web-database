@@ -1,4 +1,4 @@
-package com.omar.demo.data;
+package com.omar.demo.cache;
 
 public interface Cache {
   Object getObject(long id);
