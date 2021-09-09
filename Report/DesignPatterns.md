@@ -8,7 +8,7 @@ which in a family of algorithms to use.
 ### How did I implement the strategy pattern?
 + I implemented the strategy pattern by providing a high-level abstraction (interface) as a contract for different modules
 that serve a specific goal, but with difference in the algorithm/implementation of how the goal is achieved.
-![image](Crud.png)
+![image](https://raw.githubusercontent.com/omar2682000/web-database/master/Report/Crud.png)
 
 ## Proxy Pattern
 ### What is the proxy pattern?
@@ -25,7 +25,7 @@ interface.
 + I implemented the proxy pattern by providing an object that behaves as a proxy to few resources, it's also possible to
 say that my implementation to the proxy pattern is also a strategy pattern implementation, as I merged the two patterns
 to satisfy the goal of accessing different resources.
-![](AnimeResourceProxy.png)
+![](https://raw.githubusercontent.com/omar2682000/web-database/master/Report/AnimeResourceProxy.png)
 
 ## Builder Pattern
 ### What is the builder pattern?
@@ -37,7 +37,7 @@ from its representation.
 + I implemented the builder pattern by hiding constructors of objects that have over four or more parameters with optional 
 & required parameters, giving flexibility to the construction process, reducing the number of constructors & cleaning the
 code, and reducing possibilities of corrupted objects to be constructed.
-![](Builder.png)
+![](https://raw.githubusercontent.com/omar2682000/web-database/master/Report/Builder.png)
 
 ## Null Object Pattern
 ### What is the null object pattern?
@@ -53,7 +53,7 @@ but with the property of a null state, an example is when an object constructed 
 returning null and having to deal with NullPointerException later on, or instead of throwing an exception, I simply return
 a null object that is similar to the requested object, but with a null state, it simply does nothing, all the fields are
 set to some value equivalent to null (but not null of course).
-![](NullObject.png)
+![](https://raw.githubusercontent.com/omar2682000/web-database/master/Report/NullObject.png)
 
 ## Data Access Object Pattern (merged with Decorator Pattern intention)
 ### What is the data access object pattern?
@@ -78,7 +78,7 @@ entirely new object.
 to access the data records present in the database, but instead of directly accessing data, it works as a decorator for
 other objects that serve as access point to data, this implementation satisfies the single responsibility principle,
 dependency injection principle & the idea of deep encapsulation.
-![](DAO.png)
+![](https://raw.githubusercontent.com/omar2682000/web-database/master/Report/DAO.png)
 
 ## Mediator Pattern
 ### What is the mediator pattern?
@@ -94,7 +94,7 @@ pattern basically works towards satisfying the dependency injection principle.
 ### How did I implement the mediator pattern?
 + I implemented the mediator pattern by providing an object that encapsulates how a set of objects interact with each 
 other, reducing the coupling between them. 
-![](Mediator.png)
+![](https://raw.githubusercontent.com/omar2682000/web-database/master/Report/Mediator.png)
 
 ## Model View Controller Pattern
 ### What is the model view controller pattern?
