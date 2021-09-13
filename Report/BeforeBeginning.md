@@ -16,4 +16,5 @@
       to defend the points that are related to what I have done in this project and aware of.
 
 + I noticed that we can't use spring right at the moment of submission, as I used spring, I decided to use the last few 
-hours in converting my project into a Java EE application, for that reason, I am submitting to versions of the code.
+hours in converting my project into a Java EE application, for that reason, I will work on the servlets version until
+the discussion.
