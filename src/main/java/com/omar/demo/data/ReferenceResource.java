@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-class ResourceObject implements Resource {
-  private static final Map<Long, String> resources = new HashMap<>();
+class ReferenceResource implements Resource {
+  private final Map<Long, String> resources = new HashMap<>();
   private final Class<?> objectClass;
 
-  public ResourceObject(Class<?> objectClass) {
+  public ReferenceResource(Class<?> objectClass) {
     this.objectClass = objectClass;
   }
 
@@ -16,7 +16,7 @@ class ResourceObject implements Resource {
   public Object access(long id) {
     synchronized (resources) {
       if (resources.get(id) == null) {
-        return NullSingletonObject.getInstance();
+        return "";
       } else {
         return resources.get(id);
       }
@@ -26,7 +26,7 @@ class ResourceObject implements Resource {
   @Override
   public void add(long id, String reference) {
     synchronized (resources) {
-      resources.put(id, reference);
+      resources.putIfAbsent(id, reference);
     }
   }
 

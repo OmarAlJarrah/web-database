@@ -10,7 +10,7 @@ public class AdminService {
   public boolean addUser(long id, String password, String userType) {
     Object user = UserBuilder.getBuilder()
             .userId(id)
-            .isAdmin(userType.equals("admin"))
+            .isAdmin(userType.equalsIgnoreCase("admin"))
             .password(password);
     return AuthorizationManager.addUser(user);
   }

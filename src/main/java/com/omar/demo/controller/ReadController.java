@@ -1,6 +1,7 @@
 package com.omar.demo.controller;
 
 import com.omar.demo.data.AnimeResourceProxy;
+import com.omar.demo.data.Proxy;
 import com.omar.demo.data.Resource;
 import com.omar.demo.data.StudioResourceProxy;
 import com.omar.demo.service.ReadService;
@@ -38,12 +39,13 @@ public class ReadController {
   @PostMapping("read")
   public CompletableFuture<ModelAndView> read(@RequestParam("id") String id, @RequestParam("type") String type) {
     ModelAndView model = new ModelAndView("read");
-    Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
-    if (validationService.validateDataRecordId(Long.parseLong(id), resource)) {
-      model.addObject(type, service.read(Long.parseLong(id), resource));
+    Proxy proxy = (type.equalsIgnoreCase("anime")? animeResourceProxy : studioResourceProxy);
+    if (validationService.validateDataRecordId(Long.parseLong(id), proxy)) {
+      model.addObject(type, service.read(Long.parseLong(id), proxy));
     } else {
       model.addObject("errorMessage", "Invalid id");
     }
+
     return CompletableFuture.completedFuture(model);
   }
 
@@ -51,8 +53,8 @@ public class ReadController {
   @PostMapping("/readAll")
   public CompletableFuture<ModelAndView> readAll(@RequestParam("type") String type) {
     ModelAndView model = new ModelAndView("read");
-    Resource resource = (type.equals("anime")? animeResourceProxy : studioResourceProxy);
-    model.addObject(type, service.readAll(resource));
+    Proxy proxy = (type.equalsIgnoreCase("anime")? animeResourceProxy : studioResourceProxy);
+    model.addObject(type, service.readAll(proxy));
     return CompletableFuture.completedFuture(model);
   }
 }

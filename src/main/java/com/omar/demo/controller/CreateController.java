@@ -40,7 +40,7 @@ public class CreateController {
   @Async
   @PostMapping("/create")
   public CompletableFuture<String> postCreate(@RequestParam("operation") String operation, ModelMap model) {
-      model.addAttribute("formView", "anime-form.jsp");
+      model.addAttribute("formView", operation);
     return CompletableFuture.completedFuture("create");
   }
 

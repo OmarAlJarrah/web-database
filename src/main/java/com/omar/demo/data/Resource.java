@@ -10,4 +10,5 @@ public interface Resource {
   Class<?> getOutputClass();
 
   Set<Long> getKeySet();
+
 }

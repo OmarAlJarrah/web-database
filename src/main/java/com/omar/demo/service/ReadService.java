@@ -1,18 +1,24 @@
 package com.omar.demo.service;
 
 import com.omar.demo.data.DAO;
+import com.omar.demo.data.Proxy;
 import com.omar.demo.data.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ReadService {
-  public List<Object> read(long id, Resource resource) {
-    return DAO.getInstance().read(id, resource);
+
+  @Autowired
+  DAO dao;
+
+  public List<Object> read(long id, Proxy proxy) {
+    return dao.read(id, proxy);
   }
 
-  public List<Object> readAll(Resource resource) {
-    return new DAO().readAll(resource);
+  public List<Object> readAll(Proxy proxy) {
+    return dao.readAll(proxy);
   }
 }

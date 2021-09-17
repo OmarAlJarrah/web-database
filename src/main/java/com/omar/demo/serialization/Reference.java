@@ -20,7 +20,7 @@ public class Reference {
   }
 
   public static long parseId(String reference) {
-    int indexOfFirstDot = reference.indexOf('.');
+    int indexOfFirstDot = reference.indexOf('c');
     return Long.parseLong(reference.substring(0, indexOfFirstDot));
   }
 

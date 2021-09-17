@@ -35,6 +35,8 @@ public class AdminController {
     if (!validationService.validatePassword(password)
                         || !service.addUser(Long.parseLong(id), password, userType)) {
       model.addAttribute("errorMessage", "Invalid data!");
+    } else {
+      service.addUser(Long.parseLong(id), password, userType);
     }
     model.addAttribute("formView", "admin-form.jsp");
     return "admin";

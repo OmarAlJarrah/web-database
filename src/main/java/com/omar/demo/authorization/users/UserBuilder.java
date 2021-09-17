@@ -1,9 +1,14 @@
 package com.omar.demo.authorization.users;
 
+import com.omar.demo.objects.DataRecord;
+import com.omar.demo.serialization.SerializationMediator;
+
 public class UserBuilder {
   User user;
 
-  private UserBuilder() {}
+  private UserBuilder() {
+    user = new User();
+  }
 
   public static UserBuilder getBuilder() {
     return new UserBuilder();
@@ -39,11 +44,10 @@ public class UserBuilder {
 
   private boolean validatePassword() {
     String password = this.user.getPassword();
-    return  (password == null || password.equals(""));
+    return  !(password == null || password.equals(""));
   }
 
   private boolean validate() {
     return validateId() && validatePassword();
   }
-
 }

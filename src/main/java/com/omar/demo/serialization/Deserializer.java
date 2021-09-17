@@ -18,6 +18,8 @@ class Deserializer  {
     try (BufferedReader in = new BufferedReader(new FileReader(path))) {
       String obj = in.readLine();
       return gson.fromJson(obj, objectClass);
+    } catch (FileNotFoundException e) {
+      // Expected in case the required record does not exist
     } catch (Exception e) {
       e.printStackTrace();
     } return new NullAnime();

@@ -1,5 +1,6 @@
 package com.omar.demo.data;
 
+import com.omar.demo.cache.Cache;
 import com.omar.demo.log.Log;
 import com.omar.demo.objects.DataRecord;
 import com.omar.demo.serialization.SerializationMediator;
@@ -14,30 +15,37 @@ import java.util.Set;
 @Component
 public class DAO  {
 
-  private static DAO dao;
-
   @Autowired
   Log logger;
 
-  public List<Object> read(long id, Resource resource) {
+  public List<Object> read(long id, Proxy proxy) {
     List<Object> list = new ArrayList<>();
-    synchronized (resource.access(id)){
-      Crud readOperation = ReadOperationObject.getNewInstance(id);
-      OperationMediator operationMediator = OperationMediator.getOperationMediator(readOperation, resource);
-      list.add(operationMediator.doAction());
-      return list;
+    Cache cache = proxy.getCache();
+    Object dataRecord = cache.getObject(id);
+
+    if (dataRecord instanceof NullSingletonObject) {
+      synchronized (proxy.access(id)) {
+        Crud readOperation = ReadOperationObject.getNewInstance(id);
+        OperationMediator operationMediator = OperationMediator.getOperationMediator(readOperation, proxy);
+        dataRecord = operationMediator.doAction();
+      }
     }
+
+    list.add(dataRecord);
+    return list;
   }
 
-  public List<Object> readAll(Resource resource) {
+  public List<Object> readAll(Proxy proxy) {
     List<Object> list = new ArrayList<>();
-    Set<Long> keys = resource.getKeySet();
+    Set<Long> keys = proxy.getKeySet();
     for (long id: keys) {
-      if (resource.access(id) == null)
+      Object object = proxy.access(id);
+      if (object == null || object instanceof NullSingletonObject) {
         continue; // In case it was deleted at some other thread.
-      synchronized (resource.access(id)){
+      }
+      synchronized (object) {
         Crud readOperation = ReadOperationObject.getNewInstance(id);
-        OperationMediator operationMediator = OperationMediator.getOperationMediator(readOperation, resource);
+        OperationMediator operationMediator = OperationMediator.getOperationMediator(readOperation, proxy);
         list.add(operationMediator.doAction());
       }
     }
@@ -75,12 +83,5 @@ public class DAO  {
   public void update(Resource resource, DataRecord dataRecord) {
     delete(dataRecord.getId(), resource);
     create(resource, dataRecord);
-  }
-
-  public static DAO getInstance() {
-    if (dao == null) {
-      dao = new DAO();
-    }
-    return dao;
   }
 }
