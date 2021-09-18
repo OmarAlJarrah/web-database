@@ -10,8 +10,8 @@ public class DeleteOperationObject implements Crud {
   }
 
   @Override
-  public Object doAction(Resource resource) {
-    return new File((String) resource.access(id)).delete();
+  public Object doAction(Proxy proxy) {
+    return new File((String) proxy.access(id)).delete();
   }
 
   public static DeleteOperationObject getNewInstance(long id) {

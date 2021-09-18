@@ -2,19 +2,19 @@ package com.omar.demo.data;
 
 class OperationMediator {
   Crud crudOperation;
-  Resource resource;
+  Proxy proxy;
 
-  private OperationMediator(Crud crudOperation, Resource resource) {
+  private OperationMediator(Crud crudOperation, Proxy proxy) {
     this.crudOperation = crudOperation;
-    this.resource = resource;
+    this.proxy = proxy;
   }
 
   public Object doAction() {
-    return crudOperation.doAction(resource);
+    return crudOperation.doAction(proxy);
   }
 
 
-  public static OperationMediator getOperationMediator(Crud crudOperation, Resource resource) {
-    return new OperationMediator(crudOperation, resource);
+  public static OperationMediator getOperationMediator(Crud crudOperation, Proxy proxy) {
+    return new OperationMediator(crudOperation, proxy);
   }
 }

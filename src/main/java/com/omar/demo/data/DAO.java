@@ -29,6 +29,7 @@ public class DAO  {
         Crud readOperation = ReadOperationObject.getNewInstance(id);
         OperationMediator operationMediator = OperationMediator.getOperationMediator(readOperation, proxy);
         dataRecord = operationMediator.doAction();
+        cache.update(id, dataRecord, proxy.getOverallRecordsCount());
       }
     }
 
@@ -75,7 +76,7 @@ public class DAO  {
     String transaction = new StringBuilder()
             .append("create ")
             .append(new Date().getTime())
-            .append(SerializationMediator.getSerializedString(dataRecord, operationMediator.resource.getOutputClass()))
+            .append(SerializationMediator.getSerializedString(dataRecord, operationMediator.proxy.getOutputClass()))
             .toString();
 
     logger.logTransaction(transaction);
@@ -84,5 +85,6 @@ public class DAO  {
   public void update(Proxy proxy, DataRecord dataRecord) {
     delete(dataRecord.getId(), proxy);
     create(proxy, dataRecord);
+    proxy.getCache().update(dataRecord.getId(), dataRecord, proxy.getOverallRecordsCount());
   }
 }

@@ -12,8 +12,13 @@ class ReadOperationObject implements Crud {
 
 
   @Override
-  public Object doAction(Resource resource) {
-    return SerializationMediator.deserialize(id, resource.getOutputClass());
+  public Object doAction(Proxy proxy) {
+    Object object = proxy.getCache().getObject(id);
+    if (object instanceof NullSingletonObject) {
+      object = SerializationMediator.deserialize(id, proxy);
+      proxy.getCache().update(id, object, proxy.getOverallRecordsCount());
+    }
+    return object;
   }
 
   public static ReadOperationObject getNewInstance(long id) {

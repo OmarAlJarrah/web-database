@@ -1,5 +1,6 @@
 package com.omar.demo.serialization;
 
+import com.omar.demo.data.Proxy;
 import com.omar.demo.objects.DataRecord;
 
 public class SerializationMediator {
@@ -8,6 +9,10 @@ public class SerializationMediator {
 
   public static synchronized void serialize(DataRecord dataRecord, Class<?> objectClass) {
     Serializer.serialize(dataRecord, objectClass);
+  }
+
+  public static synchronized Object deserialize(long id, Proxy proxy) {
+    return Deserializer.deserialize(id, proxy);
   }
 
   public static synchronized Object deserialize(long id, Class<?> objectClass) {

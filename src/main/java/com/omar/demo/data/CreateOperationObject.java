@@ -14,10 +14,10 @@ public class CreateOperationObject implements Crud {
   }
 
   @Override
-  public Object doAction(Resource resource) {
-    SerializationMediator.serialize(dataRecord, resource.getOutputClass());
-    resource.add(id, Reference.parseReference(id, resource.getOutputClass()));
-    return null;
+  public Object doAction(Proxy proxy) {
+    SerializationMediator.serialize(dataRecord, proxy.getOutputClass());
+    proxy.add(id, Reference.parseReference(id, proxy.getOutputClass()));
+    return NullSingletonObject.getInstance();
   }
 
   public static CreateOperationObject getNewInstance(long id, DataRecord dataRecord) {

@@ -8,8 +8,9 @@ import java.util.Set;
 
 @Component
 public class StudioResourceProxy implements Proxy {
-  private static final Resource referenceResource = new ReferenceResource(Studio.class);
-  private static final Cache cacheObject = CacheObject.getNewInstance();
+  private final Resource referenceResource = new ReferenceResource(Studio.class);
+  private final Cache cacheObject = CacheObject.getNewInstance();
+  private static double overallRecordsCounter = 0;
 
   @Override
   public Class<?> getOutputClass() {
@@ -23,7 +24,10 @@ public class StudioResourceProxy implements Proxy {
 
   @Override
   public void add(long id, String reference) {
-    referenceResource.add(id, reference);
+    synchronized (referenceResource){
+      referenceResource.add(id, reference);
+      ++overallRecordsCounter;
+    }
   }
 
   @Override
@@ -34,6 +38,16 @@ public class StudioResourceProxy implements Proxy {
   @Override
   public Cache getCache() {
     return cacheObject;
+  }
+
+  @Override
+  public double getOverallRecordsCount() {
+    return overallRecordsCounter;
+  }
+
+  @Override
+  public Class<?> getObjectClass() {
+    return Studio.class;
   }
 }
 
