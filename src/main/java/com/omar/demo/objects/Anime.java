@@ -1,6 +1,7 @@
 package com.omar.demo.objects;
 
 
+@SuppressWarnings({"FieldMayBeFinal", "unused"})
 public class Anime implements DataRecord { // package-private
   private final long id;
   private String name;

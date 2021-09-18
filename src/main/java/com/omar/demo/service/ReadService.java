@@ -2,12 +2,12 @@ package com.omar.demo.service;
 
 import com.omar.demo.data.DAO;
 import com.omar.demo.data.Proxy;
-import com.omar.demo.data.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Service
 public class ReadService {
 

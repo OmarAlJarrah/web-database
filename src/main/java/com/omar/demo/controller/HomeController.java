@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Controller
 public class HomeController {
+  private static final String VIEW = "home";
 
   @Autowired
   AnimeResourceProxy animeResourceProxy;
@@ -21,7 +23,7 @@ public class HomeController {
   @Async
   @GetMapping({"/home", "/"})
   public CompletableFuture<String> getHome() {
-    return CompletableFuture.completedFuture("home");
+    return CompletableFuture.completedFuture(VIEW);
   }
 
 }

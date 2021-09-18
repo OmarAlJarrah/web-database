@@ -1,8 +1,5 @@
 package com.omar.demo.authorization.users;
 
-import com.omar.demo.objects.DataRecord;
-import com.omar.demo.serialization.SerializationMediator;
-
 public class UserBuilder {
   User user;
 
@@ -14,7 +11,7 @@ public class UserBuilder {
     return new UserBuilder();
   }
 
-  Object create() {
+  public Object build() {
     if (validate()) {
       return user;
     } else {
@@ -39,7 +36,7 @@ public class UserBuilder {
   }
 
   private boolean validateId() {
-    return  !AuthorizationManager.userExists(user.getId());
+    return AuthorizationManager.userNotExists(user.getId());
   }
 
   private boolean validatePassword() {

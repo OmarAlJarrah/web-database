@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Controller
 public class DeleteController {
+  private static final String VIEW = "delete";
 
   @Autowired
   AnimeResourceProxy animeResourceProxy;
@@ -32,7 +34,7 @@ public class DeleteController {
 
   @GetMapping("/delete")
   public String getDelete() {
-    return "delete";
+    return VIEW;
   }
 
   @Async
@@ -48,7 +50,6 @@ public class DeleteController {
     } else {
       model.addAttribute("errorMessage", "Invalid Id");
     }
-    return CompletableFuture.completedFuture("delete");
+    return CompletableFuture.completedFuture(VIEW);
   }
-
 }

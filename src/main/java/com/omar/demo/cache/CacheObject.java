@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Component("CacheObject")
 @Scope("prototype")
 public class CacheObject implements Cache {

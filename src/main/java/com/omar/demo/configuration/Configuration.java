@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.util.Objects;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Component
 public class Configuration {
   @Autowired

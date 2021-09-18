@@ -13,15 +13,17 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Controller
 public class LoginController {
+  private static final String VIEW = "login";
 
   @Autowired
   LoginService service;
 
   @GetMapping("/login")
   public String getLogin() {
-    return "login";
+    return VIEW;
   }
 
   @Async
@@ -30,14 +32,22 @@ public class LoginController {
                                              @RequestParam("password") String password,
                                              @RequestParam("userType") String userType,
                                              ModelMap model, HttpServletResponse response) {
+
     if (service.validate(Long.parseLong(id),
             password, userType.equals("admin"))) {
-      response.addCookie(new Cookie("authorized", "true"));
-      response.addCookie(new Cookie("isAdmin", Boolean.toString(userType.equals("admin"))));
+
+      response.addCookie(
+              new Cookie(
+                      "authorized", "true"));
+
+      response.addCookie(
+              new Cookie("isAdmin",
+                      Boolean.toString(userType.equals("admin"))));
+
       return CompletableFuture.completedFuture("home");
     } else {
       model.addAttribute("errorMessage", "ERROR");
-      return CompletableFuture.completedFuture("login");
+      return CompletableFuture.completedFuture(VIEW);
     }
   }
 

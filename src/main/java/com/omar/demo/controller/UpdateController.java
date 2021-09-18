@@ -11,10 +11,12 @@ import java.util.concurrent.CompletableFuture;
 
 @Controller
 public class UpdateController {
+  private static final String VIEW = "update";
 
+  @Async
   @GetMapping("/update")
-  public String getUpdate() {
-    return "update";
+  public CompletableFuture<String> getUpdate() {
+    return CompletableFuture.completedFuture(VIEW);
   }
 
   @Async
@@ -23,6 +25,6 @@ public class UpdateController {
                                               ModelMap model) {
     String form = (type.equalsIgnoreCase("anime")? "anime-form.jsp" : "studio-form.jsp");
     model.addAttribute("formView", form);
-    return CompletableFuture.completedFuture("update");
+    return CompletableFuture.completedFuture(VIEW);
   }
 }

@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Controller
 public class CreateController {
+  private static final String VIEW = "create";
+
   @Autowired
   CreateService service;
 
@@ -34,14 +37,14 @@ public class CreateController {
 
   @GetMapping("/create")
   public String getCreate()  {
-    return "create";
+    return VIEW;
   }
 
   @Async
   @PostMapping("/create")
   public CompletableFuture<String> postCreate(@RequestParam("operation") String operation, ModelMap model) {
       model.addAttribute("formView", operation);
-    return CompletableFuture.completedFuture("create");
+    return CompletableFuture.completedFuture(VIEW);
   }
 
   @Async
@@ -67,7 +70,7 @@ public class CreateController {
     } else {
       model.addAttribute("errorMessage", "Invalid data!");
     }
-    return CompletableFuture.completedFuture("create");
+    return CompletableFuture.completedFuture(VIEW);
   }
 
   @Async
@@ -90,6 +93,6 @@ public class CreateController {
     } else {
       model.addAttribute("errorMessage", "Invalid data!");
     }
-    return CompletableFuture.completedFuture("create");
+    return CompletableFuture.completedFuture(VIEW);
   }
 }

@@ -11,7 +11,8 @@ public class AdminService {
     Object user = UserBuilder.getBuilder()
             .userId(id)
             .isAdmin(userType.equalsIgnoreCase("admin"))
-            .password(password);
+            .password(password)
+            .build();
     return AuthorizationManager.addUser(user);
   }
 }

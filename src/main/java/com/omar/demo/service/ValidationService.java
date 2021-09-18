@@ -1,6 +1,5 @@
 package com.omar.demo.service;
 
-import com.omar.demo.data.NullSingletonObject;
 import com.omar.demo.data.Proxy;
 import com.omar.demo.data.Resource;
 import com.omar.demo.objects.DataRecord;

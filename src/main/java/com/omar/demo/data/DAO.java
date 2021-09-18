@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Component
 public class DAO  {
 
@@ -43,7 +44,7 @@ public class DAO  {
       if (object == null || object instanceof NullSingletonObject) {
         continue; // In case it was deleted at some other thread.
       }
-      synchronized (object) {
+      synchronized (proxy.access(id)) {
         Crud readOperation = ReadOperationObject.getNewInstance(id);
         OperationMediator operationMediator = OperationMediator.getOperationMediator(readOperation, proxy);
         list.add(operationMediator.doAction());
@@ -52,10 +53,10 @@ public class DAO  {
     return list;
   }
 
-  public void delete(long id, Resource resource) {
-    synchronized (resource.access(id)){
+  public void delete(long id, Proxy proxy) {
+    synchronized (proxy.access(id)){
       Crud deleteOperation = DeleteOperationObject.getNewInstance(id);
-      OperationMediator operationMediator = OperationMediator.getOperationMediator(deleteOperation, resource);
+      OperationMediator operationMediator = OperationMediator.getOperationMediator(deleteOperation, proxy);
       operationMediator.doAction();
       String transaction = new StringBuilder()
                       .append("delete ")
@@ -66,9 +67,9 @@ public class DAO  {
     }
   }
 
-  public void create(Resource resource, DataRecord dataRecord) {
+  public void create(Proxy proxy, DataRecord dataRecord) {
     Crud createOperation = CreateOperationObject.getNewInstance(dataRecord.getId(), dataRecord);
-    OperationMediator operationMediator = OperationMediator.getOperationMediator(createOperation, resource);
+    OperationMediator operationMediator = OperationMediator.getOperationMediator(createOperation, proxy);
     operationMediator.doAction();
 
     String transaction = new StringBuilder()
@@ -80,8 +81,8 @@ public class DAO  {
     logger.logTransaction(transaction);
   }
 
-  public void update(Resource resource, DataRecord dataRecord) {
-    delete(dataRecord.getId(), resource);
-    create(resource, dataRecord);
+  public void update(Proxy proxy, DataRecord dataRecord) {
+    delete(dataRecord.getId(), proxy);
+    create(proxy, dataRecord);
   }
 }
